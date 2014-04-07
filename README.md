@@ -1,7 +1,7 @@
 Use Soapower with Docker
 ======
 
-Run
+Run Soapower 1.3.2
 ----
 ```
 docker run yesnault/docker-soapower:132
