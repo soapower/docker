@@ -1,13 +1,13 @@
 Use Soapower with Docker
 ======
 
-Run Soapower 1.3.2
+Run Soapower 1.3.2 with container on index.docker.io
 ----
 ```
-docker run yesnault/docker-soapower:132
+docker run -i -d -p 49010:9010 -p 49011:3306 -p 49012:22 --privileged -t -v /data/soapower/mysql:/var/lib/mysql yesnault/docker-soapower:132
 ```
 
-Build and Run
+Run Soapower 1.3.2 with your own newly built container
 -----------
 ```
 git clone https://github.com/soapower/docker.git
