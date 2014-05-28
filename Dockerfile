@@ -20,10 +20,12 @@ RUN apt-get -y update
 RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 RUN apt-get -y install oracle-java7-installer
 
-# Install MySQL
-RUN apt-get install -y mysql-server mysql-client libmysqlclient-dev
-RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
-ADD ./create_db.sh /create_db.sh
+# Install MongoDB
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+RUN echo 'deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+RUN apt-get -y update
+RUN apt-get install -y mongodb-org
+RUN mkdir -p /data/db
 
 # Install Git to retreive soapower source
 RUN apt-get install -y git
@@ -39,14 +41,14 @@ RUN mkdir -p /var/log/supervisor
 # Create Soapower directory
 RUN mkdir -p /opt/soapower
 
-# Download Soapower distrib 1.4.0
-RUN (cd /opt/soapower && wget --no-check-certificate https://github.com/soapower/soapower/releases/download/1.4.0/soapower-1.4.0.zip -O soapower-1.4.0.zip)
+# Download Soapower distrib 2.0.0-Alpha1
+RUN (cd /opt/soapower && wget --no-check-certificate https://github.com/soapower/soapower/releases/download/2.0.0-Alpha1/soapower-2.0.0-Alpha1.zip -O soapower-2.0.0-Alpha1.zip)
 
-# Unzipping distrib 1.4.0
-RUN (cd /opt/soapower && unzip soapower-1.4.0.zip)
+# Unzipping distrib 2.0.0-Alpha1
+RUN (cd /opt/soapower && unzip soapower-2.0.0-Alpha1.zip)
 
 # Create symbolic lynk
-RUN (cd /opt/soapower && rm -f current; ln -s soapower-1.4.0 current)
+RUN (cd /opt/soapower && rm -f current; ln -s soapower-2.0.0-Alpha1 current)
 
 # Grants execution
 RUN chmod +x /opt/soapower/current/soapowerctl.sh
@@ -55,4 +57,4 @@ ADD ./startup.sh /opt/startup.sh
 
 CMD ["/opt/startup.sh"]
 
-EXPOSE 9010 3306 22
+EXPOSE 9010 29017 22
