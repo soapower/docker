@@ -4,7 +4,7 @@ Use Soapower with Docker
 Run Soapower 2.0.0-Alpha1 with container on index.docker.io
 ----
 ```
-docker run -i -d -p 49010:9010 -p 49011:27017 -p 49012:22 --privileged -t -v /data/soapower/mongodb:/data/db yesnault/docker-soapower:200-Alpha1
+docker run -i -d -p 49010:9010 -p 49011:27017 -p 49012:22 --privileged -t -v /data/soapower/mongodb:/data/db yesnault/docker-soapower:200-alpha1
 ```
 
 Run Soapower 2.0.0-Alpha1 with your own newly built container
