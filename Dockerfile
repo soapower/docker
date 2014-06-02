@@ -41,14 +41,14 @@ RUN mkdir -p /var/log/supervisor
 # Create Soapower directory
 RUN mkdir -p /opt/soapower
 
-# Download Soapower distrib 2.0.0-Alpha1
-RUN (cd /opt/soapower && wget --no-check-certificate https://github.com/soapower/soapower/releases/download/2.0.0-Alpha1/soapower-2.0.0-Alpha1.zip -O soapower-2.0.0-Alpha1.zip)
+# Download Soapower distrib 2.0.0-Alpha2
+RUN (cd /opt/soapower && wget --no-check-certificate https://github.com/soapower/soapower/releases/download/2.0.0-Alpha2/soapower-2.0.0-Alpha2.zip -O soapower-2.0.0-Alpha2.zip)
 
-# Unzipping distrib 2.0.0-Alpha1
-RUN (cd /opt/soapower && unzip soapower-2.0.0-Alpha1.zip)
+# Unzipping distrib 2.0.0-Alpha2
+RUN (cd /opt/soapower && unzip soapower-2.0.0-Alpha2.zip)
 
 # Create symbolic lynk
-RUN (cd /opt/soapower && rm -f current; ln -s soapower-2.0.0-Alpha1 current)
+RUN (cd /opt/soapower && rm -f current; ln -s soapower-2.0.0-Alpha2 current)
 
 # Grants execution
 RUN chmod +x /opt/soapower/current/soapowerctl.sh
