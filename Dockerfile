@@ -8,11 +8,13 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 RUN apt-get update
 
 # Get Utils
-RUN apt-get install -y ssh wget vim less zip cron lsof
+RUN apt-get install -y ssh wget vim less zip cron lsof sudo
 RUN mkdir /var/run/sshd
-RUN useradd -d /home/admin -m -s /bin/bash admin
-RUN echo 'admin:docker' |chpasswd
-RUN echo 'root:docker' |chpasswd
+RUN useradd -d /home/admin -m -s /bin/sh admin
+RUN echo 'admin:docker' | chpasswd
+RUN echo 'root:docker' | chpasswd
+RUN echo 'admin ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/admin
+RUN chmod 0440 /etc/sudoers.d/admin
 
 # Get JAVA 7
 RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee /etc/apt/sources.list.d/webupd8team-java.list
