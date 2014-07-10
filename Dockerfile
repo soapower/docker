@@ -16,6 +16,12 @@ RUN echo 'root:docker' | chpasswd
 RUN echo 'admin ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/admin
 RUN chmod 0440 /etc/sudoers.d/admin
 
+# Workaround bug ssh debian jessie https://bugs.debian.org/726661
+RUN sed -e '/.*pam_loginuid.so/ s/^#*/#/' -i /etc/pam.d/sshd
+RUN sed -e '/.*pam_loginuid.so/ s/^#*/#/' -i /etc/pam.d/cron
+RUN /etc/init.d/ssh restart
+RUN /etc/init.d/cron restart
+
 # Get JAVA 7
 RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee /etc/apt/sources.list.d/webupd8team-java.list
 RUN echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
