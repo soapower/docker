@@ -53,7 +53,7 @@ RUN (cd /opt/soapower && wget --no-check-certificate https://github.com/soapower
 
 # Unzipping Soapower
 RUN (cd /opt/soapower && unzip soapower-2.1.3.zip)
-Ë
+
 # Create symbolic lynk
 RUN (cd /opt/soapower && rm -f current; ln -s soapower-2.1.3 current)
 
