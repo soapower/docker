@@ -49,13 +49,13 @@ RUN apt-get clean
 RUN mkdir -p /opt/soapower/backups
 
 # Download Soapower distrib
-RUN (cd /opt/soapower && wget --no-check-certificate https://github.com/soapower/soapower/releases/download/2.1.1/soapower-2.1.1.zip -O soapower-2.1.1.zip)
+RUN (cd /opt/soapower && wget --no-check-certificate https://github.com/soapower/soapower/releases/download/2.1.3/soapower-2.1.3.zip -O soapower-2.1.3.zip)
 
 # Unzipping Soapower
-RUN (cd /opt/soapower && unzip soapower-2.1.1.zip)
+RUN (cd /opt/soapower && unzip soapower-2.1.3.zip)
 Ë
 # Create symbolic lynk
-RUN (cd /opt/soapower && rm -f current; ln -s soapower-2.1.1 current)
+RUN (cd /opt/soapower && rm -f current; ln -s soapower-2.1.3 current)
 
 # Grants execution
 RUN chmod +x /opt/soapower/current/soapowerctl.sh
