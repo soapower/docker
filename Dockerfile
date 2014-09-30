@@ -22,13 +22,13 @@ RUN sed -e '/.*pam_loginuid.so/ s/^#*/#/' -i /etc/pam.d/cron
 RUN /etc/init.d/ssh restart
 RUN /etc/init.d/cron restart
 
-# Get JAVA 7
+# Get JAVA 8
 RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee /etc/apt/sources.list.d/webupd8team-java.list
 RUN echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
 RUN apt-get -y update
-RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-RUN apt-get -y install oracle-java7-installer
+RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+RUN apt-get -y install oracle-java8-installer
 
 # Install MongoDB
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
@@ -49,13 +49,13 @@ RUN apt-get clean
 RUN mkdir -p /opt/soapower/backups
 
 # Download Soapower distrib
-RUN (cd /opt/soapower && wget --no-check-certificate https://github.com/soapower/soapower/releases/download/2.1.3/soapower-2.1.3.zip -O soapower-2.1.3.zip)
+RUN (cd /opt/soapower && wget --no-check-certificate https://github.com/soapower/soapower/releases/download/2.1.4/soapower-2.1.4.zip -O soapower-2.1.4.zip)
 
 # Unzipping Soapower
-RUN (cd /opt/soapower && unzip soapower-2.1.3.zip)
+RUN (cd /opt/soapower && unzip soapower-2.1.4.zip)
 
 # Create symbolic lynk
-RUN (cd /opt/soapower && rm -f current; ln -s soapower-2.1.3 current)
+RUN (cd /opt/soapower && rm -f current; ln -s soapower-2.1.4 current)
 
 # Grants execution
 RUN chmod +x /opt/soapower/current/soapowerctl.sh
